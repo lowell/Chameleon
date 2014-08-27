@@ -80,16 +80,15 @@
     //Choose Between Schemes
     switch (colorScheme) {
         case ColorSchemeAnalogous:
-            if (isFlatScheme) return [self analogousColorSchemeFromHue:h Saturation:s Brightness:b flat:YES];
-            else return [self analogousColorSchemeFromHue:h Saturation:s Brightness:b flat:NO];
+            return [self analogousColorSchemeFromHue:h Saturation:s Brightness:b flat:isFlatScheme];
         case ColorSchemeComplementary:
-            if (isFlatScheme) return [self complementaryColorSchemeFromHue:h Saturation:s Brightness:b flat:YES];
-            else return [self complementaryColorSchemeFromHue:h Saturation:s Brightness:b flat:NO];
+            return [self complementaryColorSchemeFromHue:h Saturation:s Brightness:b flat:isFlatScheme];
         case ColorSchemeTriadic:
-            if (isFlatScheme) return [self triadicColorSchemeFromHue:h Saturation:s Brightness:b flat:YES];
-            else return [self triadicColorSchemeFromHue:h Saturation:s Brightness:b flat:NO];
-            default:
-            NSAssert(0, @"Oops! Unrecognized color scheme provided as random color.");
+            return [self triadicColorSchemeFromHue:h Saturation:s Brightness:b flat:isFlatScheme];
+        default:
+            @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                           reason:@"Oops! Unrecognized color scheme provided as random color."
+                                         userInfo:@{}];
     }
 }
 
